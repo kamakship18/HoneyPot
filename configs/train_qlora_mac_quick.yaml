@@ -1,0 +1,46 @@
+# Quick training config for Mac - 1 epoch only for testing
+# Use this to quickly test if training works, then use train_qlora_mac.yaml for full training
+
+model_name_or_path: "HuggingFaceTB/SmolLM2-1.7B-Instruct"
+
+train_jsonl: "data/scam_finetune_train.jsonl"
+eval_jsonl: "data/scam_finetune_eval.jsonl"
+
+output_dir: "outputs/chirag-scam-detector-v1"
+
+max_seq_length: 1024
+
+num_train_epochs: 1  # Reduced from 2 for faster training
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 4
+
+learning_rate: 2.0e-5
+weight_decay: 0.0
+warmup_ratio: 0.03
+lr_scheduler_type: "cosine"
+
+logging_steps: 5
+eval_steps: 25  # Reduced for faster testing
+save_steps: 25  # Reduced for faster testing
+save_total_limit: 2
+
+seed: 42
+
+use_4bit: false
+bnb_4bit_quant_type: "nf4"
+bnb_4bit_compute_dtype: "bfloat16"
+
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
+

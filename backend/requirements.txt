@@ -1,0 +1,8 @@
+# Minimal deps for running the API only (no training).
+# Use this when deploying backend/ to Railway, Render, etc.
+fastapi==0.115.6
+uvicorn==0.30.6
+openai==1.59.6
+python-dotenv==1.0.1
+pymongo>=4.9,<4.10
+motor==3.6.0

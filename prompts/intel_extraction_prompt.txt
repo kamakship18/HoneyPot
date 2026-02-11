@@ -1,0 +1,22 @@
+Extract scam intelligence from the conversation. Output ONLY a single JSON object, no other text.
+
+Schema:
+{
+  "upi_ids": ["list of UPI IDs mentioned, e.g. xyz@paytm"],
+  "links": ["list of URLs/links mentioned"],
+  "bank_accounts": ["account number(s) mentioned"],
+  "ifsc_codes": ["IFSC codes mentioned"],
+  "bank_names": ["bank names mentioned"],
+  "branch_names": ["bank branch names mentioned"],
+  "phone_numbers": ["list of phone numbers"],
+  "emails": ["list of email addresses"],
+  "suspicious_keywords": ["list of suspicious keywords/phrases used"],
+  "tactics": ["list of tactics used: e.g. urgency, fear, authority_impersonation, fake_refund, payment_request, remote_access_request"]
+}
+
+Rules:
+- Extract only what appears in the conversation. Use empty list [] if none.
+- For bank_accounts and ifsc_codes, extract separately.
+- Include bank_names and branch_names if present.
+- tactics: pick from urgency, fear, authority_impersonation, fake_refund, payment_request, remote_access_request, gift_lottery, other.
+- Output valid JSON only.

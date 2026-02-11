@@ -1,0 +1,20 @@
+transformers==4.48.0
+datasets==2.19.2
+accelerate==0.33.0
+peft==0.12.0
+# bitsandbytes is typically Linux + NVIDIA GPU oriented.
+# Skip on macOS so you can run backend/eval/UI locally; use it on Linux GPU boxes for QLoRA.
+bitsandbytes==0.42.0; platform_system != "Darwin"
+pyyaml==6.0.2
+# Tokenizer deps for LLaMA/Mistral (sentencepiece) and fast tokenizers (protobuf)
+sentencepiece>=0.2.0
+protobuf>=4.0
+trl==0.10.1
+torch>=2.3.0
+fastapi==0.115.6
+uvicorn==0.30.6
+openai==1.59.6
+python-dotenv==1.0.1
+pymongo>=4.9,<4.10
+motor==3.6.0
+

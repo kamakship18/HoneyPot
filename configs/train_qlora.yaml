@@ -1,0 +1,51 @@
+# Hackathon-grade defaults: small epochs, low LR, instruction tuning.
+# Note: Base model for comparison (Groq) is llama-3.3-70b-versatile; we fine-tune 8B locally
+# and serve it as chirag/scam-detector-v1 for local testing.
+
+# Use a non-gated model so training works without Meta approval.
+# If you have Hugging Face access to LLaMA 3, set: meta-llama/Meta-Llama-3-8B-Instruct
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+
+train_jsonl: "data/scam_finetune_train.jsonl"
+eval_jsonl: "data/scam_finetune_eval.jsonl"
+
+# Fine-tuned model saved here; serve with scripts/serve_ft_model.py as chirag/scam-detector-v1
+output_dir: "outputs/chirag-scam-detector-v1"
+
+max_seq_length: 2048
+
+num_train_epochs: 2
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 8
+
+learning_rate: 1.0e-5
+weight_decay: 0.0
+warmup_ratio: 0.03
+lr_scheduler_type: "cosine"
+
+logging_steps: 10
+eval_steps: 100
+save_steps: 100
+save_total_limit: 2
+
+seed: 42
+
+# QLoRA settings
+use_4bit: true
+bnb_4bit_quant_type: "nf4"
+bnb_4bit_compute_dtype: "bfloat16"
+
+# LoRA adapter settings
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+  - "gate_proj"
+  - "up_proj"
+  - "down_proj"
+
