@@ -1,4 +1,4 @@
-# Gavi-HCL: Honeypot Public API (Hackathon)
+# Gavi-HCL: Honeypot Public API 
 
 **This project is a PUBLIC REST API** for hackathon evaluation. It is **not** a chatbot, frontend app, or generic scam classifier. The platform tests it by sending HTTP requests and checking JSON responses.
 
